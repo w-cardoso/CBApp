@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/item_pull_request_title"
+        android:layout_width="@dimen/dimen_0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_16dp"
+        android:layout_marginTop="@dimen/margin_32dp"
+        android:layout_marginEnd="@dimen/margin_16dp"
+        android:textSize="@dimen/size_20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Titulo do Pull Request" />
+
+    <TextView
+        android:id="@+id/item_pull_request_description"
+        android:layout_width="@dimen/dimen_0dp"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/size_16sp"
+        app:layout_constraintEnd_toEndOf="@+id/item_pull_request_title"
+        app:layout_constraintStart_toStartOf="@+id/item_pull_request_title"
+        app:layout_constraintTop_toBottomOf="@+id/item_pull_request_title"
+        tools:text="Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.." />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/item_pull_request_img"
+        android:layout_width="@dimen/margin_50dp"
+        android:layout_height="@dimen/margin_50dp"
+        android:layout_marginTop="@dimen/margin_8dp"
+        app:layout_constraintStart_toStartOf="@+id/item_pull_request_title"
+        app:layout_constraintTop_toBottomOf="@+id/item_pull_request_description"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
+        app:srcCompat="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/item_pull_request_username"
+        android:layout_width="@dimen/dimen_0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_16dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/item_pull_request_title"
+        app:layout_constraintStart_toEndOf="@+id/item_pull_request_img"
+        app:layout_constraintTop_toTopOf="@+id/item_pull_request_img"
+        tools:text="username" />
+
+    <TextView
+        android:id="@+id/item_pull_request_name_surname"
+        android:layout_width="@dimen/dimen_0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/item_pull_request_img"
+        app:layout_constraintEnd_toEndOf="@+id/item_pull_request_title"
+        app:layout_constraintStart_toStartOf="@+id/item_pull_request_username"
+        app:layout_constraintTop_toBottomOf="@+id/item_pull_request_username"
+        tools:text="Nome Sobrenome" />
+</androidx.constraintlayout.widget.ConstraintLayout>
