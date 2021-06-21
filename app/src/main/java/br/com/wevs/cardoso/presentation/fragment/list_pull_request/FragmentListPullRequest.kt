@@ -1,4 +1,4 @@
-package br.com.wevs.cardoso.presentation.fragment
+package br.com.wevs.cardoso.presentation.fragment.list_pull_request
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import br.com.wevs.cardoso.R
 
-class FragmentListJava : Fragment() {
+class FragmentListPullRequest : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -15,9 +15,13 @@ class FragmentListJava : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(
-            R.layout.fragment_list_java,
+            R.layout.fragment_list_pull_request,
             container,
             false
         )
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
     }
 }

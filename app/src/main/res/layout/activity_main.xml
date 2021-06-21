@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.MainActivity">
+    tools:context=".presentation.activity.MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/activity_main_appBarLayout"
@@ -22,12 +22,13 @@
             android:minHeight="?android:attr/actionBarSize">
 
             <TextView
+                android:textColor="@color/white"
                 android:textSize="@dimen/text_dimen_20sp"
                 android:id="@+id/toolbar_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                tools:text="Toolbar Title" />
+                android:text="GitHub JavaPop" />
 
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>

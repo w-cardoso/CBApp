@@ -1,9 +1,10 @@
-package br.com.wevs.cardoso.presentation
+package br.com.wevs.cardoso.presentation.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import br.com.wevs.cardoso.R
+
 
 class MainActivity : AppCompatActivity() {
 
