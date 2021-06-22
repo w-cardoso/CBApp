@@ -3,6 +3,7 @@ package br.com.wevs.cardoso.di
 import br.com.wevs.cardoso.data.GitHubRepositoryImplements
 import br.com.wevs.cardoso.domain.repository.GitHubRepository
 import br.com.wevs.cardoso.domain.usecase.JavaTopUseCase
+import br.com.wevs.cardoso.domain.usecase.PullRequestUseCase
 import br.com.wevs.cardoso.network.GitHubService
 import com.google.gson.Gson
 import okhttp3.OkHttpClient
@@ -37,10 +38,14 @@ fun createService(retrofit: Retrofit): GitHubService {
     return retrofit.create(GitHubService::class.java)
 }
 
-fun createMainRepository(apiService: GitHubService): GitHubRepository {
+fun createTopJavaRepository(apiService: GitHubService): GitHubRepository {
     return GitHubRepositoryImplements(apiService)
 }
 
-fun createGetMainUseCase(mainRepository: GitHubRepository): JavaTopUseCase {
+fun createGetTopJavaUseCase(mainRepository: GitHubRepository): JavaTopUseCase {
     return JavaTopUseCase(mainRepository)
+}
+
+fun createGetPullRequestUseCase(mainRepository: GitHubRepository): PullRequestUseCase {
+    return PullRequestUseCase(mainRepository)
 }

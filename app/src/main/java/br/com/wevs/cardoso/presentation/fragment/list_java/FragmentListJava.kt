@@ -6,11 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.MergeAdapter
 import androidx.recyclerview.widget.RecyclerView
 import br.com.wevs.cardoso.R
+import br.com.wevs.cardoso.domain.model.Item
 import br.com.wevs.cardoso.domain.model.TopJava
 import br.com.wevs.cardoso.presentation.activity.LoadState
 import br.com.wevs.cardoso.presentation.adapter.AdapterTopJava
@@ -20,11 +21,13 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class FragmentListJava : Fragment() {
-
-    private val mainViewModel: ListJavaViewModel by viewModel()
+    private val controller by lazy { findNavController() }
+    private val javaViewModel: ListJavaViewModel by viewModel()
     private val adapterTopJava: AdapterTopJava by inject()
     private val loadStateAdapter: LoadStateAdapter by inject()
+    private var items: MutableList<Item>? = null
     private var page: Int = 1
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,11 +46,12 @@ class FragmentListJava : Fragment() {
         setupsRecyclerView(view)
         getListJavaTop(page)
 
-        mainViewModel.viewStates.observe(viewLifecycleOwner, { viewStates ->
+        javaViewModel.viewStates.observe(viewLifecycleOwner, { viewStates ->
             viewStates.let {
                 when (it) {
                     is ListJavaDataStates.CallSucess -> {
                         populateListAdapter(it.topJava)
+                        items = it.topJava.items
                     }
 
                     is ListJavaDataStates.CallError -> {
@@ -56,10 +60,19 @@ class FragmentListJava : Fragment() {
                 }
             }
         })
+
+        adapterTopJava.onItemClick = { pos, _ ->
+            val itemClicked = items?.get(pos)
+            val direcao = FragmentListJavaDirections.actionListJavaToListPullRequest(
+                itemClicked?.owner?.login ?: "", itemClicked?.name ?: ""
+            )
+            controller.navigate(direcao)
+        }
+
     }
 
     private fun getListJavaTop(page: Int) {
-        mainViewModel.interpret(ListJavaInteractor.GetListTopJava(page))
+        javaViewModel.interpret(ListJavaInteractor.GetListTopJava(page))
     }
 
     private fun messageError() {
@@ -74,7 +87,6 @@ class FragmentListJava : Fragment() {
         with(view.findViewById<RecyclerView>(R.id.list_top_java_rcv)) {
             addItemDecoration(DividerItemDecoration(this.context, RecyclerView.VERTICAL))
             adapter = MergeAdapter(adapterTopJava, loadStateAdapter)
-            layoutManager = LinearLayoutManager(view.context)
             addOnScrollListener(object : RecyclerView.OnScrollListener() {
                 override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                     super.onScrollStateChanged(recyclerView, newState)
@@ -88,3 +100,4 @@ class FragmentListJava : Fragment() {
         }
 
 }
+

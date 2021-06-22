@@ -1,6 +1,7 @@
 package br.com.wevs.cardoso.domain.usecase
 
 import br.com.wevs.cardoso.domain.exception.traceErrorException
+import br.com.wevs.cardoso.domain.model.PullRequestModelItem
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import java.util.concurrent.CancellationException

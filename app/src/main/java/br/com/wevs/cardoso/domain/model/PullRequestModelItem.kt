@@ -1,13 +1,11 @@
 package br.com.wevs.cardoso.domain.model
 
 data class PullRequestModelItem(
-    val _links: Links,
     val active_lock_reason: Any,
     val assignee: Any,
     val assignees: List<Any>,
     val author_association: String,
     val auto_merge: Any,
-    val base: Base,
     val body: String,
     val closed_at: Any,
     val comments_url: String,
@@ -36,5 +34,5 @@ data class PullRequestModelItem(
     val title: String,
     val updated_at: String,
     val url: String,
-    val user: UserXX
+    val user: User
 )

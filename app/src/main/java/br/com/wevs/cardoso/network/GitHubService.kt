@@ -15,5 +15,5 @@ interface GitHubService {
     suspend fun getPullRequest(
         @Path("owner") owner: String,
         @Path("repo") repo: String
-    ): List<PullRequestModelItem>
+    ): MutableList<PullRequestModelItem>
 }

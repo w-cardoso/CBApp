@@ -5,8 +5,9 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/listJava">
     <fragment
-        android:name="br.com.wevs.cardoso.presentation.fragment.list_java.FragmentListJava"
         android:id="@+id/listJava"
+        android:name="br.com.wevs.cardoso.presentation.fragment.list_java.FragmentListJava"
+        android:label="List Top Java"
         tools:layout="@layout/fragment_list_java">
         <action
             android:id="@+id/action_listJava_to_listPullRequest"
@@ -20,5 +21,11 @@
         android:name="br.com.wevs.cardoso.presentation.fragment.list_pull_request.FragmentListPullRequest"
         android:id="@+id/listPullRequest"
         tools:layout="@layout/fragment_list_pull_request">
+        <argument
+            android:name="owner"
+            app:argType="string" />
+        <argument
+            android:name="repo"
+            app:argType="string" />
     </fragment>
 </navigation>

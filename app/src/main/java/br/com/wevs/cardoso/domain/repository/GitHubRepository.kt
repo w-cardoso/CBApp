@@ -7,6 +7,6 @@ interface GitHubRepository {
 
     suspend fun getTopListJava(page: Int): TopJava
 
-    suspend fun getPullRequest(owner: String, repo: String): List<PullRequestModelItem>
+    suspend fun getPullRequest(owner: String, repo: String): MutableList<PullRequestModelItem>
 
 }

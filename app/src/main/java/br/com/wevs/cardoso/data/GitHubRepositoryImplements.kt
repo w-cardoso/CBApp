@@ -11,7 +11,7 @@ class GitHubRepositoryImplements(private val apiService: GitHubService) : GitHub
         return apiService.getListTopJava(page)
     }
 
-    override suspend fun getPullRequest(owner: String, repo: String): List<PullRequestModelItem> {
+    override suspend fun getPullRequest(owner: String, repo: String): MutableList<PullRequestModelItem> {
         return apiService.getPullRequest(owner, repo)
     }
 }
