@@ -1,4 +1,4 @@
-package br.com.wevs.cardoso.presentation.fragment.list_pull_request
+package br.com.wevs.cardoso.presentation.fragment.listPullRequest
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

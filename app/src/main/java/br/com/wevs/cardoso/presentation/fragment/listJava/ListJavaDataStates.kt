@@ -1,4 +1,4 @@
-package br.com.wevs.cardoso.presentation.fragment.list_java
+package br.com.wevs.cardoso.presentation.fragment.listJava
 
 import br.com.wevs.cardoso.domain.model.TopJava
 
@@ -8,5 +8,5 @@ sealed class ListJavaDataStates {
 }
 
 sealed class ListJavaInteractor {
-    data class GetListTopJava(val page: Int) : ListJavaInteractor()
+    data class GetListTopJava(val page: Int?) : ListJavaInteractor()
 }

@@ -1,4 +1,4 @@
-package br.com.wevs.cardoso.presentation.fragment.list_pull_request
+package br.com.wevs.cardoso.presentation.fragment.listPullRequest
 
 import br.com.wevs.cardoso.domain.model.PullRequestModelItem
 

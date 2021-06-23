@@ -4,6 +4,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import br.com.wevs.cardoso.R
+import br.com.wevs.cardoso.constants.EMPTY_STRING
 import br.com.wevs.cardoso.domain.model.PullRequestModelItem
 import br.com.wevs.cardoso.extensions.inflate
 import br.com.wevs.cardoso.extensions.loadImage
@@ -35,18 +36,16 @@ class AdapterPullRequest : RecyclerView.Adapter<AdapterPullRequest.PullRequestVi
         fun bind(item: PullRequestModelItem) = with(itemView) {
             findViewById<TextView>(R.id.item_pull_request_title).text = item.title
             findViewById<TextView>(R.id.item_pull_request_description).text =
-                item.head.repo?.description ?: ""
+                item.head.repo?.description ?: EMPTY_STRING
             findViewById<TextView>(R.id.item_pull_request_username).text = item.user.login
             findViewById<TextView>(R.id.item_pull_request_name_surname).text =
-                item.head.repo?.full_name ?: " "
+                item.head.repo?.full_name ?: EMPTY_STRING
 
-            this.loadImage(
+            item.user.avatar_url.loadImage(
                 findViewById(R.id.item_pull_request_img),
-                item.user.avatar_url,
                 progressBar = findViewById(R.id.item_pull_request_img_progressBar)
             )
         }
-
     }
 
     companion object {

@@ -5,7 +5,7 @@ import br.com.wevs.cardoso.domain.model.TopJava
 
 interface GitHubRepository {
 
-    suspend fun getTopListJava(page: Int): TopJava
+    suspend fun getTopListJava(page: Int?): TopJava
 
     suspend fun getPullRequest(owner: String, repo: String): MutableList<PullRequestModelItem>
 

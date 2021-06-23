@@ -1,4 +1,4 @@
-package br.com.wevs.cardoso.presentation.fragment.list_java
+package br.com.wevs.cardoso.presentation.fragment.listJava
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -19,7 +19,7 @@ class ListJavaViewModel(private val useCase: JavaTopUseCase) : ViewModel() {
         is ListJavaInteractor.GetListTopJava -> getListTopJava(interactor.page)
     }
 
-    private fun getListTopJava(page: Int) {
+    private fun getListTopJava(page: Int?) {
         useCase.invoke(viewModelScope, page, object : UseCaseResponse<TopJava> {
             override fun onSuccess(result: TopJava) {
                 state.postValue(ListJavaDataStates.CallSucess(result))

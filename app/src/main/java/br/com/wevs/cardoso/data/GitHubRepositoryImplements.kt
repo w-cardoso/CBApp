@@ -7,7 +7,7 @@ import br.com.wevs.cardoso.network.GitHubService
 
 class GitHubRepositoryImplements(private val apiService: GitHubService) : GitHubRepository {
 
-    override suspend fun getTopListJava(page: Int): TopJava {
+    override suspend fun getTopListJava(page: Int?): TopJava {
         return apiService.getListTopJava(page)
     }
 

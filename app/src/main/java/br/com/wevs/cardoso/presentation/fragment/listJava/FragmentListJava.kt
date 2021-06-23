@@ -1,4 +1,4 @@
-package br.com.wevs.cardoso.presentation.fragment.list_java
+package br.com.wevs.cardoso.presentation.fragment.listJava
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.MergeAdapter
 import androidx.recyclerview.widget.RecyclerView
 import br.com.wevs.cardoso.R
+import br.com.wevs.cardoso.constants.EMPTY_STRING
 import br.com.wevs.cardoso.domain.model.Item
 import br.com.wevs.cardoso.domain.model.TopJava
 import br.com.wevs.cardoso.presentation.activity.LoadState
@@ -25,7 +26,7 @@ class FragmentListJava : Fragment() {
     private val javaViewModel: ListJavaViewModel by viewModel()
     private val adapterTopJava: AdapterTopJava by inject()
     private val loadStateAdapter: LoadStateAdapter by inject()
-    private var items: MutableList<Item>? = null
+    private var items: MutableList<Item> = mutableListOf()
     private var page: Int = 1
 
 
@@ -45,42 +46,54 @@ class FragmentListJava : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupsRecyclerView(view)
         getListJavaTop(page)
+        initViewModel()
+        setupsOnClick()
 
+    }
+
+    private fun setupsOnClick() {
+        adapterTopJava.onItemClick = { pos ->
+            val itemClicked = items[pos]
+            val direcao = FragmentListJavaDirections.actionListJavaToListPullRequest(
+                itemClicked.owner?.login ?: EMPTY_STRING,
+                itemClicked.name ?: EMPTY_STRING
+            )
+            controller.navigate(direcao)
+        }
+    }
+
+    private fun initViewModel() {
         javaViewModel.viewStates.observe(viewLifecycleOwner, { viewStates ->
             viewStates.let {
                 when (it) {
                     is ListJavaDataStates.CallSucess -> {
                         populateListAdapter(it.topJava)
-                        items = it.topJava.items
                     }
 
                     is ListJavaDataStates.CallError -> {
-                        messageError()
+                        buildError()
                     }
                 }
             }
         })
-
-        adapterTopJava.onItemClick = { pos, _ ->
-            val itemClicked = items?.get(pos)
-            val direcao = FragmentListJavaDirections.actionListJavaToListPullRequest(
-                itemClicked?.owner?.login ?: "", itemClicked?.name ?: ""
-            )
-            controller.navigate(direcao)
-        }
-
     }
 
     private fun getListJavaTop(page: Int) {
         javaViewModel.interpret(ListJavaInteractor.GetListTopJava(page))
     }
 
-    private fun messageError() {
-        Toast.makeText(view?.context, "DEU  RUIMMM", Toast.LENGTH_LONG).show()
+    private fun buildError() {
+        //NO MELHOR CENARIO CONSTRUIRIA UM FRAGMENT PARA EXIBICAO DO ERRO
+        Toast.makeText(view?.context, "ERROR RETORNADO API", Toast.LENGTH_LONG).show()
     }
 
     private fun populateListAdapter(topJava: TopJava) {
-        adapterTopJava.listTopJava = topJava.items ?: mutableListOf()
+        val itemsApi = topJava.items
+        if (itemsApi != null) {
+            adapterTopJava.listTopJava = itemsApi
+            items.addAll(topJava.items)
+        }
+
     }
 
     private fun setupsRecyclerView(view: View) =

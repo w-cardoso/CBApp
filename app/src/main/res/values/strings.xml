@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">CBApp</string>
+    <string name="label_list_top_java">List Top Java</string>
+    <string name="label_list_pull_request">List Pull Request</string>
 </resources>

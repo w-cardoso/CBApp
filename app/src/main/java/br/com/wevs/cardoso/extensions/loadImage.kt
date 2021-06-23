@@ -8,14 +8,13 @@ import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_java.view.*
 
-fun View.loadImage(
+fun String?.loadImage(
     image: ShapeableImageView,
-    endereco: String,
     imagemDeErro: Int = R.drawable.ic_launcher_foreground,
     progressBar: ProgressBar
 ) {
     Picasso.get()
-        .load(endereco)
+        .load(this)
         .error(imagemDeErro)
         .into(image, object : Callback {
             override fun onSuccess() {

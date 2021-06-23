@@ -11,7 +11,7 @@ import br.com.wevs.cardoso.extensions.loadImage
 
 class AdapterTopJava : RecyclerView.Adapter<AdapterTopJava.TopJavaViewHolder>() {
 
-    lateinit var onItemClick: (pos: Int, view: View) -> Unit
+    lateinit var onItemClick: (pos: Int) -> Unit
 
     var listTopJava: MutableList<Item> = mutableListOf()
         set(value) {
@@ -53,15 +53,14 @@ class AdapterTopJava : RecyclerView.Adapter<AdapterTopJava.TopJavaViewHolder>() 
             findViewById<TextView>(R.id.item_java_repository_favorite).text =
                 data.stargazersCount.toString()
 
-            this.loadImage(
+            data.owner?.avatarUrl.loadImage(
                 findViewById(R.id.item_java_img),
-                data.owner?.avatarUrl ?: "",
                 progressBar = findViewById(R.id.item_java_img_progressBar)
             )
         }
 
         override fun onClick(v: View) {
-            onItemClick.invoke(itemPosition, v)
+            onItemClick.invoke(itemPosition)
         }
     }
 

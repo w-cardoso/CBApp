@@ -1,9 +1,10 @@
-package br.com.wevs.cardoso.presentation.fragment.list_pull_request
+package br.com.wevs.cardoso.presentation.fragment.listPullRequest
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -39,6 +40,10 @@ class FragmentListPullRequest : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupsRecyclerView(view)
         getListPullRequest()
+        initViewModel()
+    }
+
+    private fun initViewModel() {
         pullViewModel.viewStates.observe(viewLifecycleOwner, { viewStates ->
             viewStates.let {
                 when (it) {
@@ -59,7 +64,8 @@ class FragmentListPullRequest : Fragment() {
     }
 
     private fun buildError() {
-        TODO("Not yet implemented")
+        //NO MELHOR CENARIO CONSTRUIRIA UM FRAGMENT PARA EXIBICAO DO ERRO
+        Toast.makeText(view?.context, "ERROR RETORNADO API", Toast.LENGTH_LONG).show()
     }
 
     private fun poupulateAdapter(listPullrequest: MutableList<PullRequestModelItem>) {

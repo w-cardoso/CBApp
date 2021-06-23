@@ -16,21 +16,12 @@
 
 
         <androidx.appcompat.widget.Toolbar
+            android:theme="@style/Theme.AppCompat.NoActionBar"
             android:id="@+id/activity_main_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="?android:attr/actionBarSize">
+            android:layout_height="?attr/actionBarSize"
+            android:minHeight="?android:attr/actionBarSize"/>
 
-            <TextView
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_dimen_20sp"
-                android:id="@+id/toolbar_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="GitHub JavaPop" />
-
-        </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.fragment.app.FragmentContainerView
