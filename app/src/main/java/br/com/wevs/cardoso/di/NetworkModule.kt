@@ -19,8 +19,6 @@ val NetworkModule = module {
     single { createOkHttpClient() }
 }
 
-
-
 fun createOkHttpClient(): OkHttpClient {
     val builder = OkHttpClient.Builder()
     return builder.build()

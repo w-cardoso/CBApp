@@ -10,8 +10,10 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import br.com.wevs.cardoso.R
+import br.com.wevs.cardoso.constants.API_ERROR
 import br.com.wevs.cardoso.domain.model.PullRequestModelItem
 import br.com.wevs.cardoso.presentation.adapter.AdapterPullRequest
+import com.facebook.shimmer.ShimmerFrameLayout
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -23,6 +25,7 @@ class FragmentListPullRequest : Fragment() {
     private val arguments by navArgs<FragmentListPullRequestArgs>()
     private val owner by lazy { arguments.owner }
     private val repos by lazy { arguments.repo }
+    private lateinit var shimmerViewContainer: ShimmerFrameLayout
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,6 +41,7 @@ class FragmentListPullRequest : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        startShimmerLayout(view)
         setupsRecyclerView(view)
         getListPullRequest()
         initViewModel()
@@ -65,11 +69,12 @@ class FragmentListPullRequest : Fragment() {
 
     private fun buildError() {
         //NO MELHOR CENARIO CONSTRUIRIA UM FRAGMENT PARA EXIBICAO DO ERRO
-        Toast.makeText(view?.context, "ERROR RETORNADO API", Toast.LENGTH_LONG).show()
+        Toast.makeText(view?.context, API_ERROR, Toast.LENGTH_LONG).show()
     }
 
     private fun poupulateAdapter(listPullrequest: MutableList<PullRequestModelItem>) {
         adapterPullRequest.pullRequestList = listPullrequest
+        stopShimmerLayout()
     }
 
     private fun setupsRecyclerView(view: View) =
@@ -77,4 +82,14 @@ class FragmentListPullRequest : Fragment() {
             addItemDecoration(DividerItemDecoration(this.context, RecyclerView.VERTICAL))
             adapter = adapterPullRequest
         }
+
+    private fun startShimmerLayout(view: View) {
+        shimmerViewContainer = view.findViewById(R.id.shimmer_view_container)
+        shimmerViewContainer.startShimmerAnimation()
+    }
+
+    private fun stopShimmerLayout() {
+        shimmerViewContainer.stopShimmerAnimation()
+        shimmerViewContainer.visibility = View.GONE
+    }
 }

@@ -6,7 +6,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import java.util.concurrent.CancellationException
 
-abstract class UseCase<Type, in Params>() where Type : Any {
+abstract class UseCase<Type, in Params> where Type : Any {
 
     abstract suspend fun run(params: Params?): Type
 

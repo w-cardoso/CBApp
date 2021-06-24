@@ -11,12 +11,14 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.MergeAdapter
 import androidx.recyclerview.widget.RecyclerView
 import br.com.wevs.cardoso.R
+import br.com.wevs.cardoso.constants.API_ERROR
 import br.com.wevs.cardoso.constants.EMPTY_STRING
 import br.com.wevs.cardoso.domain.model.Item
 import br.com.wevs.cardoso.domain.model.TopJava
 import br.com.wevs.cardoso.presentation.activity.LoadState
 import br.com.wevs.cardoso.presentation.adapter.AdapterTopJava
 import br.com.wevs.cardoso.presentation.adapter.LoadStateAdapter
+import com.facebook.shimmer.ShimmerFrameLayout
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -28,6 +30,7 @@ class FragmentListJava : Fragment() {
     private val loadStateAdapter: LoadStateAdapter by inject()
     private var items: MutableList<Item> = mutableListOf()
     private var page: Int = 1
+    private lateinit var shimmerViewContainer: ShimmerFrameLayout
 
 
     override fun onCreateView(
@@ -44,6 +47,7 @@ class FragmentListJava : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        startShimmerLayout(view)
         setupsRecyclerView(view)
         getListJavaTop(page)
         initViewModel()
@@ -84,10 +88,11 @@ class FragmentListJava : Fragment() {
 
     private fun buildError() {
         //NO MELHOR CENARIO CONSTRUIRIA UM FRAGMENT PARA EXIBICAO DO ERRO
-        Toast.makeText(view?.context, "ERROR RETORNADO API", Toast.LENGTH_LONG).show()
+        Toast.makeText(view?.context, API_ERROR, Toast.LENGTH_LONG).show()
     }
 
     private fun populateListAdapter(topJava: TopJava) {
+        stopShimmerLayout()
         val itemsApi = topJava.items
         if (itemsApi != null) {
             adapterTopJava.listTopJava = itemsApi
@@ -111,6 +116,16 @@ class FragmentListJava : Fragment() {
                 }
             })
         }
+
+    private fun startShimmerLayout(view: View) {
+        shimmerViewContainer = view.findViewById(R.id.shimmer_view_container)
+        shimmerViewContainer.startShimmerAnimation()
+    }
+
+    private fun stopShimmerLayout() {
+        shimmerViewContainer.stopShimmerAnimation()
+        shimmerViewContainer.visibility = View.GONE
+    }
 
 }
 

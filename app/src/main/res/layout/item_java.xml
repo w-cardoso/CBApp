@@ -12,6 +12,7 @@
         android:layout_width="@dimen/dimen_0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_16dp"
+        android:layout_marginEnd="@dimen/margin_16dp"
         android:layout_marginTop="@dimen/margin_16dp"
         android:textSize="@dimen/size_18sp"
         app:layout_constraintEnd_toStartOf="@+id/item_java_guideline"

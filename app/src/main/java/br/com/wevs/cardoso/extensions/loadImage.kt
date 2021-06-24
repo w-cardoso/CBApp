@@ -6,7 +6,6 @@ import br.com.wevs.cardoso.R
 import com.google.android.material.imageview.ShapeableImageView
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.item_java.view.*
 
 fun String?.loadImage(
     image: ShapeableImageView,
